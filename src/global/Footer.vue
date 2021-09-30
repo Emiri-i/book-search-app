@@ -5,7 +5,15 @@
 </template>
 
 <script>
-export default {};
+import Vue from "vue";
+export default Vue.extend({
+  name: "Footer",
+  data() {
+    return {
+      value: "hoge",
+    };
+  },
+});
 </script>
 
 <style></style>

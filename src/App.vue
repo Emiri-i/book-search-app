@@ -15,6 +15,10 @@ import Footer from "@/global/Footer.vue";
 
 export default Vue.extend({
   name: "App",
+  components: {
+    Header,
+    Footer,
+  },
   data() {
     return {
       value: "hoge",
