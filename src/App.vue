@@ -15,8 +15,16 @@ import Vue from "vue";
 import Header from "@/global/Header.vue";
 import Footer from "@/global/Footer.vue";
 
+interface bookType {
+  id: number;
+  title: string;
+  image: any;
+  description: string;
+  readDate: string;
+  memo: string;
+}
 interface AppDataType {
-  books: any;
+  books: Array<bookType>;
   newBook: string;
 }
 
