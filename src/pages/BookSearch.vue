@@ -62,11 +62,11 @@ interface searchResultsType {
   img: any;
   description: string;
 }
-export interface searchResultsObj {
+interface searchResultsObj {
   title: string;
   image: any;
 }
-export interface DataType {
+interface DataType {
   keyword: string;
   searchResults: Array<searchResultsType>;
 }

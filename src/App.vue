@@ -14,11 +14,12 @@
 import Vue from "vue";
 import Header from "@/global/Header.vue";
 import Footer from "@/global/Footer.vue";
-// BookSearch
-export interface AppDataType {
+
+interface AppDataType {
   books: any;
   newBook: string;
 }
+
 const STORAGE_KEY = "books";
 export default Vue.extend({
   name: "App",
