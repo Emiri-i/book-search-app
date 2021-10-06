@@ -56,14 +56,19 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import Vue, { PropType } from "vue";
+interface searchResultsType {
+  title: string;
+  img: any;
+  description: string;
+}
 export interface searchResultsObj {
   title: string;
   image: any;
 }
 export interface DataType {
   keyword: string;
-  searchResults: any;
+  searchResults: Array<searchResultsType>;
 }
 
 export default Vue.extend({
