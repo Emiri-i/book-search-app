@@ -18,7 +18,7 @@ const routes: Array<RouteConfig> = [
     component: BookSearch,
   },
   {
-    path: "/edit",
+    path: "/edit/:id",
     name: "BookEdit",
     component: BookEdit,
   },
