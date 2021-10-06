@@ -3,7 +3,7 @@
     <Header />
     <v-main>
       <v-container>
-        <router-view @add-book-list="addBook" />
+        <router-view @add-book-list="addBook" :books="books" />
       </v-container>
     </v-main>
     <Footer />
@@ -14,15 +14,8 @@
 import Vue from "vue";
 import Header from "@/global/Header.vue";
 import Footer from "@/global/Footer.vue";
+import { bookType } from "@/libs/types";
 
-interface bookType {
-  id: number;
-  title: string;
-  image: any;
-  description: string;
-  readDate: string;
-  memo: string;
-}
 interface AppDataType {
   books: Array<bookType>;
   newBook: string;
