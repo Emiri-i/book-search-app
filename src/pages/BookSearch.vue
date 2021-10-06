@@ -99,6 +99,9 @@ export default Vue.extend({
       }
       console.log("this.searchResults", this.searchResults);
     },
+    addBookList(index: number) {
+      this.$emit("add-book-list", this.searchResults[index]);
+    },
   },
 });
 </script>
