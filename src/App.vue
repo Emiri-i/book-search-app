@@ -54,12 +54,11 @@ export default Vue.extend({
         memo: "",
       });
       this.saveBooks();
-      console.log(this.books.slice(-1)[0].id);
+      this.goToEditPage(this.books.slice(-1)[0].id);
     },
     removeBook(x: any) {
       this.books.splice(x, 1);
       this.saveBooks();
-      this.goToEditPage(this.books.slice(-1)[0].id);
     },
     saveBooks() {
       const parsed = JSON.stringify(this.books);
