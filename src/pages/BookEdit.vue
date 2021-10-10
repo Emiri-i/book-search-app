@@ -69,9 +69,7 @@ export default Vue.extend({
         readDate: "",
         memo: "",
       },
-      date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
-        .toISOString()
-        .substr(0, 10),
+      date: "",
       menu: false,
     };
   },
@@ -94,6 +92,11 @@ export default Vue.extend({
     next((vm: any) => {
       vm.$nextTick(() => {
         vm.book = vm.books[vm.$route.params.id];
+        if (vm.book.readDate) {
+          vm.date = vm.book.readDate;
+        } else {
+          vm.date = new Date().toISOString().substr(0, 10);
+        }
         console.log(vm.book);
       });
     });
