@@ -48,7 +48,7 @@ export default Vue.extend({
       this.books.push({
         id: this.books.length,
         title: e.title,
-        image: e.image,
+        image: e.img,
         description: e.description,
         readDate: "",
         memo: "",
