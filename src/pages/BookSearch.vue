@@ -62,10 +62,6 @@ interface searchResultsType {
   img: any;
   description: string;
 }
-interface searchResultsObj {
-  title: string;
-  image: any;
-}
 interface DataType {
   keyword: string;
   searchResults: Array<searchResultsType>;
