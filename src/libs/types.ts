@@ -6,3 +6,9 @@ export interface bookType {
   readDate: string;
   memo: string;
 }
+
+export interface navItemType {
+  name: string;
+  icon: string;
+  url: string;
+}
