@@ -1,6 +1,14 @@
 <template>
   <div>
     <v-row>
+      <v-col class="text-h6">
+        Search Books
+        <v-icon>
+          mdi-book-search
+        </v-icon>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col cols="6">
         <v-text-field
           label="Search by book title"
@@ -10,7 +18,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-row>
+    <!-- <v-row>
       <v-col cols="3">
         <v-btn color="primary" @click="search(keyword)">
           Search
@@ -21,7 +29,7 @@
           Back to Index
         </v-btn>
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row>
       <v-col
         cols="12"
