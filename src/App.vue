@@ -10,14 +10,12 @@
         />
       </v-container>
     </v-main>
-    <Footer />
   </v-app>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import Header from "@/global/Header.vue";
-import Footer from "@/global/Footer.vue";
 import { bookType } from "@/libs/types";
 
 interface AppDataType {
@@ -30,7 +28,6 @@ export default Vue.extend({
   name: "App",
   components: {
     Header,
-    Footer,
   },
   data(): AppDataType {
     return {
