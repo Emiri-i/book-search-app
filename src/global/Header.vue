@@ -16,9 +16,6 @@
         <v-list-item-content>
           <!-- <div class="d-flex align-center justify-center"> -->
           <v-list-item-title class="text-h6">
-            <v-icon left>
-              mdi-book-open-variant
-            </v-icon>
             Book Seach App
           </v-list-item-title>
           <!-- </div> -->
