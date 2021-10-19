@@ -14,11 +14,9 @@
     <v-navigation-drawer v-model="drawer" absolute temporary>
       <v-list-item>
         <v-list-item-content>
-          <!-- <div class="d-flex align-center justify-center"> -->
           <v-list-item-title class="text-h6">
             Book Seach App
           </v-list-item-title>
-          <!-- </div> -->
           <v-list-item-subtitle>
             broden your knowledge
           </v-list-item-subtitle>
