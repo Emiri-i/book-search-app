@@ -41,13 +41,16 @@
                 <v-row>
                   <v-col
                     cols="4"
-                    class="d-flex align-center"
-                    style="height:230px;"
+                    class="d-flex align-center justify-center"
+                    style="height:250px;"
                   >
-                    <v-img :src="book.img"></v-img>
+                    <v-img
+                      :src="book.img"
+                      style="max-height:230px; width:auto; max-width:200px;"
+                    ></v-img>
                   </v-col>
                   <v-col cols="8">
-                    <v-card-title>
+                    <v-card-title class="align-start px-0">
                       {{ book.title }}
                     </v-card-title>
                     {{ book.description }}
