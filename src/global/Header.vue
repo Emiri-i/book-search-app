@@ -52,8 +52,8 @@ export default Vue.extend({
     return {
       drawer: false,
       items: [
-        { name: "My Book List", icon: "mdi-book-open-page-variant", url: "/" },
         { name: "Search Books", icon: "mdi-book-search", url: "/search" },
+        { name: "My Books", icon: "mdi-book-open-page-variant", url: "/" },
       ],
       selectedItem: -1,
     };
