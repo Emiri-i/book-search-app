@@ -26,7 +26,7 @@
       <v-col>
         <v-divider></v-divider>
         <div class="d-flex align-center my-3">
-          <v-icon class="mr-2">mdi-bookshelf</v-icon>
+          <v-icon class="mr-2">mdi-book-multiple</v-icon>
           <div class="text-h6">Result</div>
         </div>
         <v-row>

@@ -53,7 +53,7 @@ export default Vue.extend({
       drawer: false,
       items: [
         { name: "Search Books", icon: "mdi-book-search", url: "/search" },
-        { name: "My Books", icon: "mdi-book-open-page-variant", url: "/" },
+        { name: "My Books", icon: "mdi-bookshelf", url: "/" },
         {
           name: "Want To Read",
           icon: "mdi-star-box-outline",
