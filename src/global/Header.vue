@@ -54,6 +54,11 @@ export default Vue.extend({
       items: [
         { name: "Search Books", icon: "mdi-book-search", url: "/search" },
         { name: "My Books", icon: "mdi-book-open-page-variant", url: "/" },
+        {
+          name: "Want To Read",
+          icon: "mdi-star-box-outline",
+          url: "/wantToRead",
+        },
       ],
       selectedItem: -1,
     };
