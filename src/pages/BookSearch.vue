@@ -9,7 +9,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" class="d-flex align-center">
+      <v-col cols="6" class="d-flex align-center pt-0">
         <v-text-field
           label="Search by book title"
           v-model="keyword"
@@ -23,35 +23,53 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col
-        cols="12"
-        md="6"
-        v-for="(book, index) in searchResults"
-        :key="book.index"
-      >
-        <v-card style="height:250px;">
-          <v-container>
-            <v-row>
-              <v-col cols="4" class="d-flex align-center" style="height:230px;">
-                <v-img :src="book.img"></v-img>
-              </v-col>
-              <v-col cols="8">
-                <v-card-title>
-                  {{ book.title }}
-                </v-card-title>
-                {{ book.description }}
-                <v-spacer></v-spacer>
-                <v-card-actions>
-                  <v-btn fab dark color="indigo" @click="addBookList(index)">
-                    <v-icon dark>
-                      mdi-plus
-                    </v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
+      <v-col>
+        <v-divider></v-divider>
+        <div v-show="searchResults.length" class="d-flex align-center my-3">
+          <v-icon class="mr-2">mdi-bookshelf</v-icon>
+          <div class="text-h6">Result</div>
+        </div>
+        <v-row>
+          <v-col
+            cols="12"
+            md="6"
+            v-for="(book, index) in searchResults"
+            :key="book.index"
+          >
+            <v-card style="height:250px;">
+              <v-container>
+                <v-row>
+                  <v-col
+                    cols="4"
+                    class="d-flex align-center"
+                    style="height:230px;"
+                  >
+                    <v-img :src="book.img"></v-img>
+                  </v-col>
+                  <v-col cols="8">
+                    <v-card-title>
+                      {{ book.title }}
+                    </v-card-title>
+                    {{ book.description }}
+                    <v-spacer></v-spacer>
+                    <v-card-actions>
+                      <v-btn
+                        fab
+                        dark
+                        color="indigo"
+                        @click="addBookList(index)"
+                      >
+                        <v-icon dark>
+                          mdi-plus
+                        </v-icon>
+                      </v-btn>
+                    </v-card-actions>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </div>
