@@ -28,12 +28,22 @@
         <div class="d-flex align-center my-3">
           <v-icon class="mr-2">mdi-book-multiple</v-icon>
           <div class="text-h6">Result</div>
+          <v-spacer></v-spacer>
+          <div v-show="currentItems.length > 0">
+            <div style="white-text:nowrap;">
+              {{ currentItems.length > 0 ? currentItems[0].index + 1 : "" }}-
+              {{
+                currentItems.length > 0 ? currentItems[chunk - 1].index + 1 : ""
+              }}
+              / {{ maxSearchResults }}
+            </div>
+          </div>
         </div>
         <v-row>
           <v-col
             cols="12"
             md="6"
-            v-for="(book, index) in searchResults"
+            v-for="(book, index) in currentItems"
             :key="book.index"
           >
             <v-card style="height:250px;">
@@ -75,19 +85,37 @@
         </v-row>
       </v-col>
     </v-row>
+    <v-row v-show="searchResults.length">
+      <v-col>
+        <div class="text-center">
+          <v-pagination
+            v-model="page"
+            :length="pagenationLength"
+            @input="onChangePageNumber"
+          ></v-pagination>
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+
 interface searchResultsType {
   title: string;
   img: any;
   description: string;
+  index: number;
 }
 interface DataType {
   keyword: string;
-  searchResults: Array<searchResultsType>;
+  searchResults: Array<searchResultsType[]>;
+  page: number;
+  maxSearchResults: number;
+  chunk: number;
+  pagenationLength: number;
+  currentItems: searchResultsType[];
 }
 
 export default Vue.extend({
@@ -96,32 +124,49 @@ export default Vue.extend({
     return {
       keyword: "",
       searchResults: [],
+      page: 1, //current page number
+      maxSearchResults: 30, //maximum number of the books to get when it is fetched
+      chunk: 10, //the number of books per page
+      pagenationLength: 0, //the number of total pages
+      currentItems: [], // items that appears in current page
     };
   },
+  created() {
+    this.pagenationLength = this.maxSearchResults / 10;
+    this.currentItems = [];
+    this.searchResults = [];
+  },
   methods: {
+    onChangePageNumber() {
+      this.currentItems = this.searchResults[this.page - 1];
+    },
     async search(keyword: string) {
       this.searchResults = [];
       const baseURL = "https://www.googleapis.com/books/v1/volumes?";
       const params: any = {
         q: `intitle:${keyword}`,
-        maxResults: 30,
+        maxResults: this.maxSearchResults,
       };
       const queryParams = new URLSearchParams(params);
-      console.log("params", params);
       const response = await fetch(baseURL + queryParams).then((response) =>
         response.json()
       );
-      for (let book of response.items) {
+      let resultArray: Array<searchResultsType> = [];
+      response.items.forEach((book: any, i: number) => {
         let title: string = book.volumeInfo.title;
         let img: any = book.volumeInfo.imageLinks;
         let description: string = book.volumeInfo.description;
-        this.searchResults.push({
+        resultArray.push({
           title: title ? title : "",
           img: img ? img.thumbnail : "",
           description: description ? description.slice(0, 50) : "",
+          index: i,
         });
+      });
+      for (let i = 0; i < resultArray.length; i += this.chunk) {
+        this.searchResults.push(resultArray.slice(i, i + this.chunk));
       }
-      console.log("this.searchResults", this.searchResults);
+      this.onChangePageNumber();
     },
     addBookList(index: number) {
       this.$emit("add-book-list", this.searchResults[index]);
