@@ -87,6 +87,13 @@
         </div>
       </v-col>
     </v-row>
+    <v-row v-show="!isShowResult">
+      <v-col>
+        <div class="text-center">
+          there are no results for your search.
+        </div>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
