@@ -9,17 +9,20 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6" class="d-flex align-center pt-0">
-        <v-text-field
-          label="Search by book title"
-          v-model="keyword"
-          filled
-          dense
-          hide-details="auto"
-        ></v-text-field>
-        <v-btn color="primary" @click="search(keyword)" class="ml-10">
-          Search
-        </v-btn>
+      <v-col cols="6">
+        <div class="d-flex align-center pt-0">
+          <v-text-field
+            label="Search by book title"
+            v-model="keyword"
+            filled
+            dense
+            hide-details="auto"
+            @keyup.enter="search(keyword)"
+          ></v-text-field>
+          <v-btn color="primary" @click="search(keyword)" class="ml-10">
+            Search
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
     <v-row>
