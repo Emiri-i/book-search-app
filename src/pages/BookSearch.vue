@@ -35,10 +35,7 @@
           <div v-show="currentItems.length > 0">
             <div style="white-text:nowrap;">
               {{ currentItems.length > 0 ? currentItems[0].index + 1 : "" }}-
-              <!-- {{
-                currentItems.length > 0 ? currentItems[chunk - 1].index + 1 : ""
-              }} -->
-              {{ currentItemEnd }}
+              {{ totalBookNum() }}
               / {{ maxSearchResults }}
             </div>
           </div>
@@ -127,7 +124,9 @@ export default Vue.extend({
   },
   methods: {
     onChangePageNumber() {
-      this.currentItems = this.searchResults[this.page - 1];
+      this.currentItems = this.searchResults
+        ? this.searchResults[this.page - 1]
+        : [];
     },
     async search(keyword: string) {
       this.searchResults = [];
@@ -142,27 +141,41 @@ export default Vue.extend({
       );
       console.log("response", response);
       let resultArray: Array<searchResultsType> = [];
-      response.items.forEach((book: any, i: number) => {
-        let title: string = book.volumeInfo.title;
-        let img: any = book.volumeInfo.imageLinks;
-        let description: string = book.volumeInfo.description;
-        let id: string = book.id;
-        resultArray.push({
-          title: title ? title : "",
-          img: img ? img.thumbnail : "",
-          description: description ? description.slice(0, 50) : "",
-          id: id,
-          index: i,
+      if (response.items) {
+        response.items.forEach((book: any, i: number) => {
+          console.log("b");
+          let title: string = book.volumeInfo.title;
+          let img: any = book.volumeInfo.imageLinks;
+          let description: string = book.volumeInfo.description;
+          let id: string = book.id;
+          resultArray.push({
+            title: title ? title : "",
+            img: img ? img.thumbnail : "",
+            description: description ? description.slice(0, 50) : "",
+            id: id,
+            index: i,
+          });
         });
-      });
-      //create multidimensional array to show 10 items per page
-      for (let i = 0; i < resultArray.length; i += this.chunk) {
-        this.searchResults.push(resultArray.slice(i, i + this.chunk));
+        //create multidimensional array to show 10 items per page
+        for (let i = 0; i < resultArray.length; i += this.chunk) {
+          this.searchResults.push(resultArray.slice(i, i + this.chunk));
+        }
       }
       this.onChangePageNumber();
     },
     addBookList(book: searchResultsType) {
       this.$emit("add-book-list", book);
+    },
+    totalBookNum() {
+      let endNumber = 0;
+      if (this.currentItems) {
+        endNumber =
+          this.currentItems.length > 9
+            ? this.currentItems[this.chunk - 1].index + 1
+            : this.currentItems.length;
+      }
+      console.log("endNumber", endNumber);
+      return endNumber;
     },
   },
 });
