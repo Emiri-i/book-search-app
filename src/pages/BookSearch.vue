@@ -35,20 +35,16 @@
           <div v-show="currentItems.length > 0">
             <div style="white-text:nowrap;">
               {{ currentItems.length > 0 ? currentItems[0].index + 1 : "" }}-
-              {{
+              <!-- {{
                 currentItems.length > 0 ? currentItems[chunk - 1].index + 1 : ""
-              }}
+              }} -->
+              {{ currentItemEnd }}
               / {{ maxSearchResults }}
             </div>
           </div>
         </div>
         <v-row>
-          <v-col
-            cols="12"
-            md="6"
-            v-for="book in currentItems"
-            :key="book.index"
-          >
+          <v-col cols="12" md="6" v-for="book in currentItems" :key="book.id">
             <v-card style="height:250px;">
               <v-container>
                 <v-row>
