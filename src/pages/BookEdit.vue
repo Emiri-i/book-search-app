@@ -62,7 +62,7 @@ export default Vue.extend({
   data(): BookEditDataType {
     return {
       book: {
-        id: -1,
+        id: "",
         title: "",
         image: "",
         description: "",
@@ -83,15 +83,15 @@ export default Vue.extend({
     },
   },
   props: {
-    books: {
-      type: Array as PropType<bookType[]>,
-      default: () => [],
+    selectedBook: {
+      type: Object as PropType<bookType>,
     },
   },
   beforeRouteEnter(to: any, from: any, next: any) {
     next((vm: any) => {
       vm.$nextTick(() => {
-        vm.book = vm.books[vm.$route.params.id];
+        vm.book = vm.selectedBook;
+        // console.log("vm.book ", vm.book);
         if (vm.book.readDate) {
           vm.date = vm.book.readDate;
         } else {

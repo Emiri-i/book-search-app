@@ -1,5 +1,5 @@
 export interface bookType {
-  id: number;
+  id: string;
   title: string;
   image: any;
   description: string;
@@ -11,4 +11,12 @@ export interface navItemType {
   name: string;
   icon: string;
   url: string;
+}
+
+export interface searchResultsType {
+  title: string;
+  img: any;
+  description: string;
+  id: string;
+  index: number;
 }

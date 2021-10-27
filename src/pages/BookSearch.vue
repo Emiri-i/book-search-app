@@ -43,7 +43,7 @@
           <v-col
             cols="12"
             md="6"
-            v-for="(book, index) in currentItems"
+            v-for="book in currentItems"
             :key="book.index"
           >
             <v-card style="height:250px;">
@@ -66,12 +66,7 @@
                     {{ book.description }}
                     <v-spacer></v-spacer>
                     <v-card-actions>
-                      <v-btn
-                        fab
-                        dark
-                        color="indigo"
-                        @click="addBookList(index)"
-                      >
+                      <v-btn fab dark color="indigo" @click="addBookList(book)">
                         <v-icon dark>
                           mdi-plus
                         </v-icon>
@@ -101,13 +96,8 @@
 
 <script lang="ts">
 import Vue, { PropType } from "vue";
+import { searchResultsType } from "@/libs/types";
 
-interface searchResultsType {
-  title: string;
-  img: any;
-  description: string;
-  index: number;
-}
 interface DataType {
   keyword: string;
   searchResults: Array<searchResultsType[]>;
@@ -151,25 +141,29 @@ export default Vue.extend({
       const response = await fetch(baseURL + queryParams).then((response) =>
         response.json()
       );
+      console.log("response", response);
       let resultArray: Array<searchResultsType> = [];
       response.items.forEach((book: any, i: number) => {
         let title: string = book.volumeInfo.title;
         let img: any = book.volumeInfo.imageLinks;
         let description: string = book.volumeInfo.description;
+        let id: string = book.id;
         resultArray.push({
           title: title ? title : "",
           img: img ? img.thumbnail : "",
           description: description ? description.slice(0, 50) : "",
+          id: id,
           index: i,
         });
       });
+      //create multidimensional array to show 10 items per page
       for (let i = 0; i < resultArray.length; i += this.chunk) {
         this.searchResults.push(resultArray.slice(i, i + this.chunk));
       }
       this.onChangePageNumber();
     },
-    addBookList(index: number) {
-      this.$emit("add-book-list", this.searchResults[index]);
+    addBookList(book: searchResultsType) {
+      this.$emit("add-book-list", book);
     },
   },
 });

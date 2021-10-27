@@ -5,6 +5,7 @@
       <v-container>
         <router-view
           @add-book-list="addBook"
+          :selectedBook="selectedBook"
           :books="books"
           @update-book-info="updateBookInfo"
         />
@@ -17,10 +18,12 @@
 import Vue from "vue";
 import Header from "@/global/Header.vue";
 import { bookType } from "@/libs/types";
+import { searchResultsType } from "@/libs/types";
 
 interface AppDataType {
   books: Array<bookType>;
   newBook: string;
+  selectedBook: bookType;
 }
 
 const STORAGE_KEY = "books";
@@ -33,6 +36,14 @@ export default Vue.extend({
     return {
       books: [],
       newBook: "",
+      selectedBook: {
+        id: "",
+        title: "",
+        image: "",
+        description: "",
+        readDate: "",
+        memo: "",
+      },
     };
   },
   mounted() {
@@ -45,17 +56,19 @@ export default Vue.extend({
     }
   },
   methods: {
-    addBook(e: any) {
-      this.books.push({
-        id: this.books.length,
+    addBook(e: searchResultsType) {
+      console.log("e", e);
+      let target = {
+        id: e.id,
         title: e.title,
         image: e.img,
         description: e.description,
         readDate: "",
         memo: "",
-      });
-      this.saveBooks();
-      this.goToEditPage(this.books.slice(-1)[0].id);
+      };
+      this.books.push(target);
+      // this.saveBooks();
+      this.goToEditPage(target);
     },
     removeBook(x: any) {
       this.books.splice(x, 1);
@@ -66,20 +79,38 @@ export default Vue.extend({
       localStorage.setItem(STORAGE_KEY, parsed);
     },
     updateBookInfo(e: bookType) {
-      const updateInfo: bookType = {
+      console.log("this.books", this.books);
+      let bookIndex = -1;
+      let targetBook: bookType = {
+        id: "",
+        title: "",
+        image: "",
+        description: "",
+        readDate: "",
+        memo: "",
+      };
+      this.books.forEach((book: bookType, index: number) => {
+        if (book.id === e.id) {
+          bookIndex = index;
+          targetBook = book;
+        }
+      });
+      const updateInfo = {
         id: e.id,
         readDate: e.readDate,
         memo: e.memo,
-        title: this.books[e.id].title,
-        image: this.books[e.id].image,
-        description: this.books[e.id].description,
+        title: targetBook.title,
+        image: targetBook.image,
+        description: targetBook.description,
       };
-      this.books.splice(e.id, 1, updateInfo);
+      this.books.splice(bookIndex, 1, updateInfo);
+      console.log("this.books2", this.books);
       this.saveBooks();
       this.$router.push("/");
     },
-    goToEditPage(id: number) {
-      this.$router.push(`/edit/${id}`);
+    goToEditPage(book: bookType) {
+      this.selectedBook = book;
+      this.$router.push(`/edit/${book.id}`);
     },
     deleteLocalStorage() {
       const isDeleted = "LocalStorageのデータを削除してもいいですか？";
