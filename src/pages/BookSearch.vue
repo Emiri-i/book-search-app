@@ -32,9 +32,9 @@
           <v-icon class="mr-2">mdi-book-multiple</v-icon>
           <div class="text-h6">Result</div>
           <v-spacer></v-spacer>
-          <div v-show="currentItems.length > 0">
+          <div v-show="isShowResult">
             <div style="white-text:nowrap;">
-              {{ currentItems.length > 0 ? currentItems[0].index + 1 : "" }}-
+              {{ isShowResult ? currentItems[0].index + 1 : "" }}-
               {{ totalBookNum() }}
               / {{ maxSearchResults }}
             </div>
@@ -76,7 +76,7 @@
         </v-row>
       </v-col>
     </v-row>
-    <v-row v-show="searchResults.length">
+    <v-row v-show="isShowResult">
       <v-col>
         <div class="text-center">
           <v-pagination
@@ -102,6 +102,7 @@ interface DataType {
   chunk: number;
   pagenationLength: number;
   currentItems: searchResultsType[];
+  isShowResult: boolean;
 }
 
 export default Vue.extend({
@@ -114,6 +115,7 @@ export default Vue.extend({
       maxSearchResults: 30, //maximum number of the books to get when it is fetched
       chunk: 10, //the number of books per page
       pagenationLength: 0, //the number of total pages
+      isShowResult: false,
       currentItems: [], // items that appears in current page
     };
   },
@@ -160,6 +162,7 @@ export default Vue.extend({
         for (let i = 0; i < resultArray.length; i += this.chunk) {
           this.searchResults.push(resultArray.slice(i, i + this.chunk));
         }
+        this.isShowResult = true;
       }
       this.onChangePageNumber();
     },
