@@ -56,12 +56,16 @@
                     ></v-img>
                   </v-col>
                   <v-col cols="8">
-                    <v-card-title class="align-start px-0">
-                      {{ book.title }}
-                    </v-card-title>
-                    <span class="trancate">
-                      {{ book.description }}
-                    </span>
+                    <div style="min-height:120px;">
+                      <v-card-title class="pa-0 my-2 trancate-one-line">
+                        {{ book.title }}
+                      </v-card-title>
+                      <div class="trancate-three-line">
+                        {{
+                          book.description ? book.description : "no description"
+                        }}
+                      </div>
+                    </div>
                     <v-spacer></v-spacer>
                     <v-divider class="pa-0 mt-5"></v-divider>
                     <v-card-actions class="justify-end">
@@ -175,7 +179,7 @@ export default Vue.extend({
           resultArray.push({
             title: title ? title : "",
             img: img ? img.thumbnail : "",
-            description: description ? description.slice(0, 100) : "",
+            description: description ? description.slice(0, 150) : "",
             id: id,
             index: i,
           });
@@ -208,10 +212,16 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.trancate {
+.trancate-three-line {
   display: -webkit-box;
   overflow: hidden;
   -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+.trancate-one-line {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
 }
 </style>
