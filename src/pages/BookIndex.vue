@@ -1,8 +1,12 @@
 <template>
   <div>
     <v-row>
-      <v-col cold="6">
-        <v-btn color="primary" to="/search">search books</v-btn>
+      <v-col class="text-h6 d-flex align-center">
+        <v-icon class="mr-2">
+          mdi-bookshelf
+        </v-icon>
+        My Books
+        <!-- <v-btn color="primary" to="/search">search books</v-btn> -->
       </v-col>
     </v-row>
     <v-row>
