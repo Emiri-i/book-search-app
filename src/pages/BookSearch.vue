@@ -59,7 +59,9 @@
                     <v-card-title class="align-start px-0">
                       {{ book.title }}
                     </v-card-title>
-                    {{ book.description }}
+                    <span class="trancate">
+                      {{ book.description }}
+                    </span>
                     <v-spacer></v-spacer>
                     <v-card-actions>
                       <v-btn fab dark color="indigo" @click="addBookList(book)">
@@ -161,7 +163,7 @@ export default Vue.extend({
           resultArray.push({
             title: title ? title : "",
             img: img ? img.thumbnail : "",
-            description: description ? description.slice(0, 50) : "",
+            description: description ? description.slice(0, 100) : "",
             id: id,
             index: i,
           });
@@ -193,4 +195,11 @@ export default Vue.extend({
 });
 </script>
 
-<style></style>
+<style lang="scss">
+.trancate {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+</style>
