@@ -12,44 +12,44 @@
                 <v-card-title class="font-weight-bold ">
                   {{ book.title }}
                 </v-card-title>
-                <!-- finished date -->
-                <v-menu
-                  v-model="menu"
-                  :close-on-content-click="false"
-                  :nudge-right="40"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
+                <v-card-text>
+                  <v-menu
+                    v-model="menu"
+                    :close-on-content-click="false"
+                    :nudge-right="40"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        :value="utils_.formatDate(date)"
+                        label="finished date"
+                        placeholder="select date"
+                        prepend-icon="mdi-calendar"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
                       v-model="date"
-                      label="finished date"
-                      placeholder="select date"
-                      prepend-icon="mdi-calendar"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker
-                    v-model="date"
-                    @input="menu = false"
-                  ></v-date-picker>
-                </v-menu>
-                <v-textarea
-                  v-model="book.memo"
-                  label="comment"
-                  filled
-                  class="mx-2"
-                  name="comment"
-                >
-                  {{ book.memo }}
-                </v-textarea>
-                <v-card-actions>
-                  <!-- <v-btn color="secondary" to="/">go to My Books Page</v-btn> -->
-                  <v-btn color="primary" @click="updateBookInfo">save</v-btn>
-                </v-card-actions>
+                      @input="menu = false"
+                    ></v-date-picker>
+                  </v-menu>
+                  <v-textarea
+                    v-model="book.memo"
+                    label="comment"
+                    filled
+                    class="mx-2"
+                    name="comment"
+                  >
+                    {{ book.memo }}
+                  </v-textarea>
+                  <v-card-actions>
+                    <v-btn color="primary" @click="updateBookInfo">save</v-btn>
+                  </v-card-actions>
+                </v-card-text>
               </v-col>
             </v-row>
           </v-container>
@@ -62,11 +62,13 @@
 <script lang="ts">
 import Vue, { PropType } from "vue";
 import { bookType } from "@/libs/types";
+import utils from "../libs/utils";
 
 interface BookEditDataType {
   book: bookType;
   date: string;
   menu: any;
+  utils_: any;
 }
 export default Vue.extend({
   name: "BookEdit",
@@ -82,6 +84,7 @@ export default Vue.extend({
       },
       date: "",
       menu: false,
+      utils_: undefined,
     };
   },
   methods: {
@@ -97,6 +100,9 @@ export default Vue.extend({
     selectedBook: {
       type: Object as PropType<bookType>,
     },
+  },
+  created() {
+    this.utils_ = utils;
   },
   beforeRouteEnter(to: any, from: any, next: any) {
     next((vm: any) => {
