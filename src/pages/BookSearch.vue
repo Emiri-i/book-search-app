@@ -87,7 +87,7 @@
         </div>
       </v-col>
     </v-row>
-    <v-row v-show="!isShowResult">
+    <v-row v-show="!currentItems">
       <v-col>
         <div class="text-center">
           there are no results for your search.
@@ -138,6 +138,7 @@ export default Vue.extend({
         : [];
     },
     async search(keyword: string) {
+      this.isShowResult = false;
       this.searchResults = [];
       const baseURL = "https://www.googleapis.com/books/v1/volumes?";
       const params: any = {
@@ -169,6 +170,7 @@ export default Vue.extend({
         for (let i = 0; i < resultArray.length; i += this.chunk) {
           this.searchResults.push(resultArray.slice(i, i + this.chunk));
         }
+        console.log("response.items", response.items);
         this.isShowResult = true;
       }
       this.onChangePageNumber();
