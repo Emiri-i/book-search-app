@@ -63,12 +63,24 @@
                       {{ book.description }}
                     </span>
                     <v-spacer></v-spacer>
-                    <v-card-actions>
-                      <v-btn fab dark color="indigo" @click="addBookList(book)">
-                        <v-icon dark>
-                          mdi-plus
-                        </v-icon>
-                      </v-btn>
+                    <v-divider class="pa-0 mt-5"></v-divider>
+                    <v-card-actions class="justify-end">
+                      <v-tooltip bottom>
+                        <template v-slot:activator="{ on }">
+                          <v-btn
+                            v-on="on"
+                            fab
+                            dark
+                            color="indigo"
+                            @click="addBookList(book)"
+                          >
+                            <v-icon dark>
+                              mdi-plus
+                            </v-icon>
+                          </v-btn>
+                        </template>
+                        <span>add to My Books</span>
+                      </v-tooltip>
                     </v-card-actions>
                   </v-col>
                 </v-row>
