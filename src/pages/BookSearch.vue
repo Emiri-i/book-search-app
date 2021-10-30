@@ -57,7 +57,9 @@
                   </v-col>
                   <v-col cols="8">
                     <div style="min-height:120px;">
-                      <v-card-title class="pa-0 my-2 trancate-one-line">
+                      <v-card-title
+                        class="pa-0 my-2 trancate-one-line font-weight-bold"
+                      >
                         {{ book.title }}
                       </v-card-title>
                       <div class="trancate-three-line">
