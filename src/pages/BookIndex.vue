@@ -6,7 +6,16 @@
           mdi-bookshelf
         </v-icon>
         My Books
-        <!-- <v-btn color="primary" to="/search">search books</v-btn> -->
+      </v-col>
+    </v-row>
+    <v-row no-gutters>
+      <v-col class="d-flex justify-end">
+        <v-btn text color="primary" to="/search">
+          <v-icon left color="primary">
+            mdi-arrow-right
+          </v-icon>
+          go to Search Books page
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
