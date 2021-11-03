@@ -8,6 +8,7 @@
           :selectedBook="selectedBook"
           :books="books"
           @update-book-info="updateBookInfo"
+          @delete-book="deleteBook"
         />
       </v-container>
     </v-main>
@@ -112,6 +113,28 @@ export default Vue.extend({
       this.selectedBook = book;
       this.$router.push(`/edit/${book.id}`);
     },
+    //delete one book
+    deleteBook(e: bookType) {
+      let booksBeforeDelete: any = "";
+      try {
+        booksBeforeDelete = JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "{}"
+        );
+      } catch (err) {
+        console.log(err);
+      }
+      booksBeforeDelete.forEach((book: bookType, index: number) => {
+        if (e.id === book.id) {
+          booksBeforeDelete.splice(index, 1);
+          this.books.splice(index, 1);
+          localStorage.removeItem(STORAGE_KEY);
+          const parsed = JSON.stringify(this.books);
+          localStorage.setItem(STORAGE_KEY, parsed);
+          window.location.reload();
+        }
+      });
+    },
+    //delete all books
     deleteLocalStorage() {
       const isDeleted = "LocalStorageのデータを削除してもいいですか？";
       if (window.confirm(isDeleted)) {

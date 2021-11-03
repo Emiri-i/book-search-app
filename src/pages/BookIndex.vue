@@ -53,6 +53,24 @@
                 </div>
                 <v-spacer></v-spacer>
                 <v-divider class="pa-0 mt-5"></v-divider>
+                <v-card-actions class="justify-end">
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        v-on="on"
+                        fab
+                        dark
+                        color="indigo"
+                        @click="deleteBook(book)"
+                      >
+                        <v-icon dark>
+                          mdi-delete
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <span>delete from My Books</span>
+                  </v-tooltip>
+                </v-card-actions>
               </v-col>
             </v-row>
           </v-container>
@@ -118,16 +136,18 @@ export default Vue.extend({
   created() {
     this.utils_ = utils;
   },
+  methods: {
+    deleteBook(book: bookType) {
+      const deleteMsg = "Are you sure to delete this book?";
+      if (window.confirm(deleteMsg)) {
+        this.$emit("delete-book", book);
+      }
+    },
+  },
 });
 </script>
 
 <style lang="scss" scoped>
-.trancate-three-line {
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
 .trancate-one-line {
   display: -webkit-box;
   overflow: hidden;
