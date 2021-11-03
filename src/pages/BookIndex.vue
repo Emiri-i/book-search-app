@@ -76,37 +76,6 @@
             </v-row>
           </v-container>
         </v-card>
-        <!-- <v-card>
-          <v-container>
-            <v-row>
-              <v-col cols="4">
-                <v-img :src="book.image"></v-img>
-              </v-col>
-              <v-col cols="12">
-                <v-card-title>
-                  {{ book.title }}
-                </v-card-title>
-                <div>
-                  読んだ日：{{ book.readDate }} 感想：{{ book.readDate }}
-                </div>
-                <v-spacer></v-spacer>
-                <v-card-actions>
-                  <v-btn
-                    :to="{ name: 'BookEdit', params: { id: book.id } }"
-                    color="indigo"
-                    fab
-                    small
-                    dark
-                  >
-                    <v-icon>
-                      mdi-pencil
-                    </v-icon>
-                  </v-btn>
-                </v-card-actions>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card> -->
       </v-col>
     </v-row>
   </div>

@@ -58,7 +58,6 @@ export default Vue.extend({
   },
   methods: {
     addBook(e: searchResultsType) {
-      console.log("e", e);
       let target = {
         id: e.id,
         title: e.title,
@@ -80,7 +79,6 @@ export default Vue.extend({
       localStorage.setItem(STORAGE_KEY, parsed);
     },
     updateBookInfo(e: bookType) {
-      console.log("this.books", this.books);
       let bookIndex = -1;
       let targetBook: bookType = {
         id: "",
@@ -105,7 +103,6 @@ export default Vue.extend({
         description: targetBook.description,
       };
       this.books.splice(bookIndex, 1, updateInfo);
-      console.log("this.books2", this.books);
       this.saveBooks();
       this.$router.push("/");
     },

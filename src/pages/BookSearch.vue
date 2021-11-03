@@ -169,11 +169,9 @@ export default Vue.extend({
       const response = await fetch(baseURL + queryParams).then((response) =>
         response.json()
       );
-      console.log("response", response);
       let resultArray: Array<searchResultsType> = [];
       if (response.items) {
         response.items.forEach((book: any, i: number) => {
-          console.log("b");
           let title: string = book.volumeInfo.title;
           let img: any = book.volumeInfo.imageLinks;
           let description: string = book.volumeInfo.description;
@@ -190,7 +188,6 @@ export default Vue.extend({
         for (let i = 0; i < resultArray.length; i += this.chunk) {
           this.searchResults.push(resultArray.slice(i, i + this.chunk));
         }
-        console.log("response.items", response.items);
         this.isShowResult = true;
       }
       this.onChangePageNumber();
@@ -206,7 +203,6 @@ export default Vue.extend({
             ? this.currentItems[this.chunk - 1].index + 1
             : this.currentItems.length;
       }
-      console.log("endNumber", endNumber);
       return endNumber;
     },
   },

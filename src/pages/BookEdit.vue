@@ -108,13 +108,11 @@ export default Vue.extend({
     next((vm: any) => {
       vm.$nextTick(() => {
         vm.book = vm.selectedBook;
-        // console.log("vm.book ", vm.book);
         if (vm.book.readDate) {
           vm.date = vm.book.readDate;
         } else {
           vm.date = new Date().toISOString().substr(0, 10);
         }
-        console.log(vm.book);
       });
     });
   },
