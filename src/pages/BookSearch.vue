@@ -114,6 +114,22 @@
         </div>
       </v-col>
     </v-row>
+
+    <!-- show dialog when the book you want to add is already in My Books -->
+    <v-dialog v-model="isDialogOpen" max-width="500px">
+      <v-card>
+        <v-container>
+          <v-card-title>
+            this book is already in My Books.
+          </v-card-title>
+          <v-card-actions>
+            <v-btn color="primary" text @click="closeDialog">
+              Close
+            </v-btn>
+          </v-card-actions>
+        </v-container>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -130,6 +146,7 @@ interface DataType {
   pagenationLength: number;
   currentItems: searchResultsType[];
   isShowResult: boolean;
+  isDialogOpen: boolean;
 }
 
 export default Vue.extend({
@@ -144,7 +161,21 @@ export default Vue.extend({
       pagenationLength: 0, //the number of total pages
       isShowResult: false,
       currentItems: [], // items that appears in current page
+      isDialogOpen: false,
     };
+  },
+  props: {
+    isDuplicateBook: {
+      type: Boolean,
+    },
+  },
+  watch: {
+    isDuplicateBook: {
+      immediate: true,
+      handler: function() {
+        this.isDialogOpen = this.isDuplicateBook ? true : false;
+      },
+    },
   },
   created() {
     this.pagenationLength = this.maxSearchResults / 10;
@@ -204,6 +235,10 @@ export default Vue.extend({
             : this.currentItems.length;
       }
       return endNumber;
+    },
+    closeDialog() {
+      this.isDialogOpen = false;
+      this.$emit("close-dialog");
     },
   },
 });

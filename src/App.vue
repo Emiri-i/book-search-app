@@ -7,8 +7,10 @@
           @add-book-list="addBook"
           :selectedBook="selectedBook"
           :books="books"
+          :is-duplicate-book="isDuplicateBook"
           @update-book-info="updateBookInfo"
           @delete-book="deleteBook"
+          @close-dialog="isDuplicateBook = false"
         />
       </v-container>
     </v-main>
@@ -25,6 +27,7 @@ interface AppDataType {
   books: Array<bookType>;
   newBook: string;
   selectedBook: bookType;
+  isDuplicateBook: boolean;
 }
 
 const STORAGE_KEY = "books";
@@ -45,6 +48,7 @@ export default Vue.extend({
         readDate: "",
         memo: "",
       },
+      isDuplicateBook: false,
     };
   },
   mounted() {
@@ -66,6 +70,11 @@ export default Vue.extend({
         readDate: "",
         memo: "",
       };
+      let isDuplicate = this.checkIsDuplicate(target);
+      if (isDuplicate) {
+        this.isDuplicateBook = true;
+        return;
+      }
       this.books.push(target);
       // this.saveBooks();
       this.goToEditPage(target);
@@ -140,6 +149,14 @@ export default Vue.extend({
         this.books = [];
         window.location.reload();
       }
+    },
+    //when you add a book, check if the book is already in My Books
+    checkIsDuplicate(newBook: any) {
+      let duplicateBooks = this.books.filter((book) => {
+        return newBook.id === book.id;
+      });
+      const isDuplicate = duplicateBooks.length ? true : false;
+      return isDuplicate;
     },
   },
 });
