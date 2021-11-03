@@ -2,20 +2,21 @@
   <div>
     <v-row>
       <v-col class="text-h6 d-flex align-center">
-        <v-icon class="mr-2">
-          mdi-bookshelf
-        </v-icon>
-        My Books
-      </v-col>
-    </v-row>
-    <v-row no-gutters>
-      <v-col class="d-flex justify-end">
-        <v-btn text color="primary" to="/search">
-          <v-icon left color="primary">
-            mdi-arrow-right
+        <div>
+          <v-icon class="mr-2">
+            mdi-bookshelf
           </v-icon>
-          go to Search Books page
-        </v-btn>
+          My Books
+        </div>
+        <v-spacer></v-spacer>
+        <div>
+          <v-btn text color="primary" to="/search">
+            <v-icon left color="primary">
+              mdi-arrow-right
+            </v-icon>
+            go to Search Books page
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
     <v-row>
