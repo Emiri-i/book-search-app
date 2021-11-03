@@ -133,7 +133,7 @@ export default Vue.extend({
     },
     //delete all books
     deleteLocalStorage() {
-      const isDeleted = "LocalStorageのデータを削除してもいいですか？";
+      const isDeleted = "Are you sure to delete all books？";
       if (window.confirm(isDeleted)) {
         localStorage.setItem(STORAGE_KEY, "");
         localStorage.removeItem(STORAGE_KEY);
