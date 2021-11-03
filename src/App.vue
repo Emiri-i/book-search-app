@@ -9,6 +9,7 @@
           :books="books"
           :is-duplicate-book="isDuplicateBook"
           @update-book-info="updateBookInfo"
+          @show-edit-page="showEditPage"
           @delete-book="deleteBook"
           @close-dialog="isDuplicateBook = false"
         />
@@ -75,8 +76,6 @@ export default Vue.extend({
         this.isDuplicateBook = true;
         return;
       }
-      this.books.push(target);
-      // this.saveBooks();
       this.goToEditPage(target);
     },
     removeBook(x: any) {
@@ -97,27 +96,36 @@ export default Vue.extend({
         readDate: "",
         memo: "",
       };
+      let isNewBook = true;
       this.books.forEach((book: bookType, index: number) => {
         if (book.id === e.id) {
           bookIndex = index;
           targetBook = book;
+          isNewBook = false;
         }
       });
       const updateInfo = {
-        id: e.id,
+        id: isNewBook ? e.id : targetBook.id,
         readDate: e.readDate,
         memo: e.memo,
-        title: targetBook.title,
-        image: targetBook.image,
-        description: targetBook.description,
+        title: isNewBook ? e.title : targetBook.title,
+        image: isNewBook ? e.image : targetBook.image,
+        description: isNewBook ? e.description : targetBook.description,
       };
-      this.books.splice(bookIndex, 1, updateInfo);
+      if (isNewBook) {
+        this.books.push(updateInfo);
+      } else {
+        this.books.splice(bookIndex, 1, updateInfo);
+      }
       this.saveBooks();
       this.$router.push("/");
     },
     goToEditPage(book: bookType) {
       this.selectedBook = book;
       this.$router.push(`/edit/${book.id}`);
+    },
+    showEditPage(e: bookType) {
+      this.goToEditPage(e);
     },
     //delete one book
     deleteBook(e: bookType) {

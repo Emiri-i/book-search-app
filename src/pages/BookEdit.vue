@@ -23,7 +23,7 @@
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                        :value="utils_.formatDate(date)"
+                        :value="utils_.formatDate(book.readDate)"
                         label="finished date"
                         placeholder="select date"
                         prepend-icon="mdi-calendar"
@@ -33,7 +33,7 @@
                       ></v-text-field>
                     </template>
                     <v-date-picker
-                      v-model="date"
+                      v-model="book.readDate"
                       @input="menu = false"
                     ></v-date-picker>
                   </v-menu>
@@ -89,11 +89,7 @@ export default Vue.extend({
   },
   methods: {
     updateBookInfo() {
-      this.$emit("update-book-info", {
-        id: this.$route.params.id,
-        readDate: this.date,
-        memo: this.book.memo,
-      });
+      this.$emit("update-book-info", this.book);
     },
   },
   props: {
@@ -111,7 +107,7 @@ export default Vue.extend({
         if (vm.book.readDate) {
           vm.date = vm.book.readDate;
         } else {
-          vm.date = new Date().toISOString().substr(0, 10);
+          vm.book.readDate = new Date().toISOString().substr(0, 10);
         }
       });
     });

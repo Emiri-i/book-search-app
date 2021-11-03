@@ -59,6 +59,23 @@
                     <template v-slot:activator="{ on }">
                       <v-btn
                         v-on="on"
+                        @click="goToEdit(book)"
+                        color="indigo"
+                        fab
+                        dark
+                        class="mr-4"
+                      >
+                        <v-icon>
+                          mdi-pencil
+                        </v-icon>
+                      </v-btn>
+                    </template>
+                    <span>delete from My Books</span>
+                  </v-tooltip>
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        v-on="on"
                         fab
                         dark
                         color="indigo"
@@ -112,6 +129,9 @@ export default Vue.extend({
       if (window.confirm(deleteMsg)) {
         this.$emit("delete-book", book);
       }
+    },
+    goToEdit(book: bookType) {
+      this.$emit("show-edit-page", book);
     },
   },
 });
