@@ -213,7 +213,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .trancate-three-line {
   display: -webkit-box;
   overflow: hidden;
