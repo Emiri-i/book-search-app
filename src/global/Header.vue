@@ -2,7 +2,6 @@
   <div>
     <v-app-bar app color="primary" dark>
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
-
       <v-toolbar-title>
         Book Search App
       </v-toolbar-title>

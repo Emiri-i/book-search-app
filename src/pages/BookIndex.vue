@@ -15,7 +15,7 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="books.length">
       <v-col cols="12" sm="6" v-for="book in books" :key="book.id">
         <v-card style="height:250px;">
           <v-container>
@@ -91,14 +91,17 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row>
-      <v-col class="d-flex align-center justify-start pt-0">
-        <v-btn text color="primary" to="/search" class="pl-0">
-          <v-icon left color="primary">
-            mdi-arrow-right
-          </v-icon>
-          go to Search Books page
-        </v-btn>
+    <v-row v-else>
+      <v-col>
+        <div>there are no books.</div>
+        <div class="d-flex align-center justify-start">
+          <v-btn text color="primary" to="/search" class="pl-0">
+            <v-icon left color="primary">
+              mdi-arrow-right
+            </v-icon>
+            go to Search Books page
+          </v-btn>
+        </div>
       </v-col>
     </v-row>
   </div>
