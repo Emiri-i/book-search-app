@@ -54,11 +54,6 @@ export default Vue.extend({
       selectedItem: -1,
     };
   },
-  methods: {
-    deleteLocalStorage() {
-      this.$emit("delete-local-storage");
-    },
-  },
 });
 </script>
 
