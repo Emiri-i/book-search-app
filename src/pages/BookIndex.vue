@@ -2,21 +2,17 @@
   <div>
     <v-row>
       <v-col class="text-h6 d-flex align-center">
-        <div>
-          <v-icon class="mr-2">
-            mdi-bookshelf
-          </v-icon>
-          My Books
-        </div>
+        <v-icon class="mr-2">
+          mdi-bookshelf
+        </v-icon>
+        My Books
         <v-spacer></v-spacer>
-        <div>
-          <v-btn text color="primary" to="/search">
-            <v-icon left color="primary">
-              mdi-arrow-right
-            </v-icon>
-            go to Search Books page
-          </v-btn>
-        </div>
+        <v-btn color="error" @click="deleteLocalStorage">
+          <v-icon dark left>
+            mdi-delete
+          </v-icon>
+          Delete all
+        </v-btn>
       </v-col>
     </v-row>
     <v-row>
@@ -95,6 +91,16 @@
         </v-card>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col class="d-flex align-center justify-start pt-0">
+        <v-btn text color="primary" to="/search" class="pl-0">
+          <v-icon left color="primary">
+            mdi-arrow-right
+          </v-icon>
+          go to Search Books page
+        </v-btn>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -132,6 +138,9 @@ export default Vue.extend({
     },
     goToEdit(book: bookType) {
       this.$emit("show-edit-page", book);
+    },
+    deleteLocalStorage() {
+      this.$emit("delete-local-storage");
     },
   },
 });

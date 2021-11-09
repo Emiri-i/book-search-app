@@ -1,9 +1,10 @@
 <template>
   <v-app>
-    <Header @delete-local-storage="deleteLocalStorage" />
+    <Header />
     <v-main>
       <v-container>
         <router-view
+          @delete-local-storage="deleteLocalStorage"
           @add-book-list="addBook"
           :selectedBook="selectedBook"
           :books="books"
@@ -150,7 +151,8 @@ export default Vue.extend({
     },
     //delete all books
     deleteLocalStorage() {
-      const isDeleted = "Are you sure to delete all books？";
+      const isDeleted =
+        "Are you sure?\nAll of the books in My Books are going to be deleted.";
       if (window.confirm(isDeleted)) {
         localStorage.setItem(STORAGE_KEY, "");
         localStorage.removeItem(STORAGE_KEY);
