@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import BookIndex from "@/pages/BookIndex.vue";
 import BookEdit from "@/pages/BookEdit.vue";
 import BookSearch from "@/pages/BookSearch.vue";
-import WantToRead from "@/pages/WantToRead.vue";
+// import WantToRead from "@/pages/WantToRead.vue";
 
 Vue.use(VueRouter);
 
@@ -17,11 +17,6 @@ const routes: Array<RouteConfig> = [
     path: "/search",
     name: "BookSearch",
     component: BookSearch,
-  },
-  {
-    path: "/wantToRead",
-    name: "WantToRead",
-    component: WantToRead,
   },
   {
     path: "/edit/:id",
