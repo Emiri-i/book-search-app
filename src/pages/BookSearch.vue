@@ -109,7 +109,7 @@
     </v-row>
     <v-row v-show="!currentItems">
       <v-col>
-        <div class="text-center">
+        <div>
           there are no results for your search.
         </div>
       </v-col>
