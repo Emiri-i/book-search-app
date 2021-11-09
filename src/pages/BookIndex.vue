@@ -7,7 +7,7 @@
         </v-icon>
         My Books
         <v-spacer></v-spacer>
-        <v-btn color="error" @click="deleteLocalStorage">
+        <v-btn color="error" @click="deleteLocalStorage" v-show="books.length">
           <v-icon dark left>
             mdi-delete
           </v-icon>
