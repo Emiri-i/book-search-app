@@ -9,10 +9,19 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" sm="6">
+        <v-radio-group v-model="selectedRadio" row mandatory class="mt-0">
+          <v-radio label="search by book title"></v-radio>
+          <v-radio label="search by author name"></v-radio>
+        </v-radio-group>
         <div class="d-flex align-center pt-0">
           <v-text-field
-            label="Search by book title"
+            :label="selectedRadio === 0 ? 'book title' : 'author name'"
+            :placeholder="
+              selectedRadio === 0
+                ? 'search by book title'
+                : 'search by author name'
+            "
             v-model="keyword"
             filled
             dense
@@ -147,6 +156,7 @@ interface DataType {
   currentItems: searchResultsType[];
   isShowResult: boolean;
   isDialogOpen: boolean;
+  selectedRadio: number;
 }
 
 export default Vue.extend({
@@ -162,6 +172,7 @@ export default Vue.extend({
       isShowResult: false,
       currentItems: [], // items that appears in current page
       isDialogOpen: false,
+      selectedRadio: 1,
     };
   },
   props: {
@@ -192,10 +203,12 @@ export default Vue.extend({
       this.isShowResult = false;
       this.searchResults = [];
       const baseURL = "https://www.googleapis.com/books/v1/volumes?";
-      const params: any = {
-        q: `intitle:${keyword}`,
-        maxResults: this.maxSearchResults,
-      };
+      let params: any = { q: "", maxResults: this.maxSearchResults };
+      if (this.selectedRadio === 0) {
+        params.q = `intitle:${keyword}`;
+      } else {
+        params.q = `inauthor:${keyword}`;
+      }
       const queryParams = new URLSearchParams(params);
       const response = await fetch(baseURL + queryParams).then((response) =>
         response.json()
