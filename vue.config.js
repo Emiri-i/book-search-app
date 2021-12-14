@@ -4,5 +4,5 @@ module.exports = {
   ],
   outputDir: 'docs',
   assetsDir: './',
-  publicPath: './',
+  publicPath: '/book-search-app/',
 }
