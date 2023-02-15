@@ -1,4 +1,4 @@
-## :newspaper: Book Search App
+## :books: Book Search App
 
 > This is an app that you can find books. You can keep the record of the books you finished reading.
 > Demo link : [here](https://emiri-i.github.io/book-search-app/)
